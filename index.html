@@ -279,8 +279,7 @@
                       }
                       section {
                         padding: 2em;
-                        /* MODIFIED: Removed max-width: 900px; */
-                        width: 100%; /* ADDED: Explicitly set to 100% */
+                        width: 100%; /* Explicitly set to 100% */
                         margin: auto;
                         position: relative;
                       }
@@ -396,6 +395,337 @@
                     class="student-iframe"></iframe>
         </section>
 
+        <!-- The Humans Page (Embedded Content) --><section id="the-humans-page" class="character-page p-0 bg-white rounded-xl shadow-lg overflow-hidden">
+            <!-- Back button placed above the embedded content for visibility --><div class="p-6 bg-white border-b border-gray-100">
+                <button onclick="navigate('home')" class="px-6 py-2 bg-[var(--color-primary)] text-white font-semibold rounded-full hover:bg-red-700 transition duration-150 shadow-md">
+                    ← Back to Character List
+                </button>
+                <p class="mt-4 text-sm text-gray-600">Group: Manuela R, Mirela, Gaga, Peçanha</p>
+            </div>
+            
+            <iframe id="the-humans-iframe" 
+                    srcdoc='
+                    <!DOCTYPE html>
+                    <html lang="en">
+                    <head>
+                    <meta charset="utf-8" />
+                    <meta name="viewport" content="width=device-width, initial-scale=1" />
+                    <title>Character & Context Synthesis — The Humans (Animal Farm)</title>
+                    <style>
+                      /* Global Variables (Paper Theme) */
+                      :root{
+                        --bg:#fcfbf7;
+                        --ink:#222;
+                        --ink-soft:#333;
+                        --accent:#5b7cfa; /* Blue */
+                        --accent-2:#ff8a5b; /* Orange */
+                        --good:#1aa36f;
+                        --warn:#c6781b;
+                        --bad:#d34848;
+                        --card:#fffef8;
+                        --shadow: 0 2px 10px rgba(0,0,0,.07);
+                      }
+                      
+                      body {
+                        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+                        background: var(--bg);
+                        color: var(--ink);
+                        margin: 0;
+                        padding: 0;
+                        /* IMPORTANT FIX: Ensure internal body takes full width */
+                        width: 100%; 
+                      }
+                      
+                      .container {
+                        /* IMPORTANT FIX: Explicitly setting the container to full width */
+                        width: 100%;
+                        padding: 2rem 1rem;
+                        box-sizing: border-box;
+                        line-height: 1.6;
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                      }
+
+                      h1 {
+                        font-size: 2.2rem;
+                        color: var(--bad);
+                        text-align: center;
+                        border-bottom: 3px solid var(--bad);
+                        padding-bottom: 0.5rem;
+                        margin-bottom: 1rem;
+                      }
+
+                      h2 {
+                        font-size: 1.5rem;
+                        color: var(--accent);
+                        margin-top: 2rem;
+                        border-left: 5px solid var(--accent);
+                        padding-left: 10px;
+                        width: 100%;
+                        max-width: 800px;
+                      }
+
+                      p {
+                          margin-bottom: 1rem;
+                          max-width: 800px;
+                          width: 100%;
+                      }
+
+                      .allegory-map {
+                        width: 100%;
+                        max-width: 800px;
+                        margin: 2rem 0;
+                        padding: 1rem;
+                        background: var(--card);
+                        border-radius: 12px;
+                        box-shadow: var(--shadow);
+                      }
+                      
+                      .map-title {
+                        text-align: center;
+                        font-weight: bold;
+                        font-size: 1.1rem;
+                        margin-bottom: 1rem;
+                        color: var(--ink-soft);
+                      }
+                      
+                      .map-svg {
+                        display: block;
+                        width: 100%;
+                        height: 300px;
+                      }
+                      
+                      .pin {
+                        cursor: pointer;
+                        transition: all 0.2s ease-in-out;
+                        stroke: var(--ink);
+                        stroke-width: 1;
+                        fill: var(--accent-2);
+                        transform-origin: center center;
+                      }
+                      .pin:hover {
+                        transform: scale(1.1);
+                        outline: 4px solid var(--accent);
+                        outline-offset: 4px;
+                        outline-style: dashed;
+                      }
+
+                      /* Line styling for connections */
+                      line {
+                        stroke-width: 3;
+                        stroke: var(--ink);
+                        opacity: 0.25;
+                        transition: opacity 0.3s, stroke 0.3s;
+                      }
+                      
+                      .fact-card {
+                        background: var(--card);
+                        border-radius: 8px;
+                        padding: 1.5rem;
+                        margin: 1rem 0;
+                        box-shadow: var(--shadow);
+                        border-top: 5px solid var(--accent-2);
+                        max-width: 800px;
+                        width: 100%;
+                      }
+                      
+                      .fact-card h3 {
+                        font-size: 1.2rem;
+                        color: var(--accent);
+                        margin-bottom: 0.5rem;
+                      }
+                      
+                      .quote {
+                        font-style: italic;
+                        color: var(--ink-soft);
+                        margin-top: 1rem;
+                        border-left: 2px solid var(--accent-2);
+                        padding-left: 10px;
+                      }
+
+                      footer {
+                        text-align: center;
+                        padding: 1.5rem;
+                        margin-top: 2rem;
+                        background: var(--card);
+                        border-top: 3px solid var(--accent);
+                        width: 100%;
+                      }
+                    </style>
+                    <script>
+                      function initializeAllegoryMap() {
+                        // Data structure to link humans to their historical parallels
+                        const connections = {
+                          'jones': { target: 'nicholas', name: 'Mr. Jones', allegory: 'Tsar Nicholas II (Autocracy)' },
+                          'pilk': { target: 'britain', name: 'Mr. Pilkington', allegory: 'The Allies / Western Powers (Capitalism)' },
+                          'fred': { target: 'germany', name: 'Mr. Frederick', allegory: 'Nazi Germany (Fascism)' }
+                        };
+
+                        const map = document.getElementById('map');
+                        const statusBox = document.getElementById('status-box');
+
+                        // References to the SVG lines (must have matching IDs)
+                        const lines = {
+                          jones: document.getElementById('line-jones-nicholas'),
+                          pilk: document.getElementById('line-pilk-brit'),
+                          fred: document.getElementById('line-fred-ger'),
+                        };
+
+                        // Helper function to reset all visual states
+                        const clearAll = () => {
+                          map.querySelectorAll('.pin').forEach(p=>p.style.outline='none');
+                          map.querySelectorAll('line').forEach(l=>{ l.style.opacity=.25; l.style.stroke = 'currentColor'; });
+                          statusBox.innerHTML = 'Hover over a character pin (human or historical) to see the connection.';
+                        };
+
+                        // Helper function to highlight a connection
+                        const highlight = (key) => {
+                          clearAll(); // Start by clearing everything
+                          
+                          // Determine the connection data based on the key
+                          let connection;
+                          if (connections[key]) {
+                            connection = connections[key];
+                          } else {
+                            // Find connection where the target is the key (e.g., historical figure clicked)
+                            connection = Object.values(connections).find(c => c.target === key);
+                          }
+                          
+                          if (!connection) {
+                            // If key is not part of a connection, just clear and return
+                            return; 
+                          }
+
+                          // Keys to highlight: the human (jones/pilk/fred) and their target (nicholas/britain/germany)
+                          const humanKey = Object.keys(connections).find(k => connections[k] === connection);
+                          const targetKey = connection.target;
+                          
+                          // Highlight the pins
+                          map.querySelector('.pin[data-key="' + humanKey + '"]').style.outline='4px dashed var(--accent)';
+                          map.querySelector('.pin[data-key="' + targetKey + '"]').style.outline='4px dashed var(--accent)';
+                          
+                          // Highlight the line
+                          const line = lines[humanKey];
+                          if(line){
+                            line.style.opacity=1;
+                            line.style.stroke='var(--accent)';
+                          }
+                          
+                          // Update the status box
+                          statusBox.innerHTML = '<strong>' + connection.name + '</strong> &rarr; <strong>' + connection.allegory + '</strong>. Click to clear.';
+                        };
+
+                        // Event Listener for the SVG map area
+                        map.addEventListener('click', (e)=>{
+                          const pin = e.target.closest('.pin');
+                          if(!pin){ 
+                            clearAll(); 
+                            return; 
+                          }
+                          const key = pin.dataset.key;
+                          highlight(key);
+                        });
+
+                        // Initial state setup
+                        clearAll();
+                      }
+
+                      window.onload = initializeAllegoryMap;
+                    </script>
+                    </head>
+                    <body>
+                    
+                    <div class="container">
+                    
+                      <h1>The Human Element: Tyranny, Apathy, and Exploitation</h1>
+                      <p>
+                        The human characters in <em>Animal Farm</em> are not just villains; they are allegorical representations of real-world political and economic forces that both start and threaten the revolution. They symbolize the failure of pre-revolutionary Russia and the competing interests of international powers.
+                      </p>
+
+                      <h2>The Allegory Map: Humans and History</h2>
+
+                      <div class="allegory-map">
+                        <div class="map-title">Click the pins to explore the historical parallels.</div>
+                        
+                        <svg class="map-svg" viewBox="0 0 800 300" xmlns="http://www.w3.org/2000/svg">
+                          <!-- Connection Lines (Default opacity is low) -->
+                          <line id="line-jones-nicholas" x1="100" y1="100" x2="300" y2="100"/>
+                          <line id="line-pilk-brit" x1="100" y1="200" x2="300" y2="200"/>
+                          <line id="line-fred-ger" x1="500" y1="100" x2="700" y2="100"/>
+                          
+                          <!-- Group 1: Jones and Tsar Nicholas II -->
+                          <circle class="pin" data-key="jones" cx="100" cy="100" r="15" fill="var(--bad)"/>
+                          <text x="100" y="80" text-anchor="middle" font-size="16" fill="var(--bad)">Mr. Jones</text>
+
+                          <circle class="pin" data-key="nicholas" cx="300" cy="100" r="15" fill="var(--accent)"/>
+                          <text x="300" y="80" text-anchor="middle" font-size="16" fill="var(--accent)">Tsar Nicholas II</text>
+
+
+                          <!-- Group 2: Pilkington and the West -->
+                          <circle class="pin" data-key="pilk" cx="100" cy="200" r="15" fill="var(--warn)"/>
+                          <text x="100" y="220" text-anchor="middle" font-size="16" fill="var(--warn)">Mr. Pilkington</text>
+
+                          <circle class="pin" data-key="britain" cx="300" cy="220" r="15" fill="var(--good)"/>
+                          <text x="300" y="240" text-anchor="middle" font-size="16" fill="var(--good)">Western Powers</text>
+
+
+                          <!-- Group 3: Frederick and Germany -->
+                          <circle class="pin" data-key="fred" cx="500" cy="100" r="15" fill="var(--bad)"/>
+                          <text x="500" y="80" text-anchor="middle" font-size="16" fill="var(--bad)">Mr. Frederick</text>
+                          
+                          <circle class="pin" data-key="germany" cx="700" cy="100" r="15" fill="var(--accent-2)"/>
+                          <text x="700" y="80" text-anchor="middle" font-size="16" fill="var(--accent-2)">Nazi Germany</text>
+
+                        </svg>
+
+                        <div id="status-box" style="text-align:center; margin-top:1rem; padding: 0.5rem; background: var(--bg); border-radius: 6px; color: var(--ink);">
+                          Hover over a character pin (human or historical) to see the connection.
+                        </div>
+                      </div>
+
+                      <h2>Character Breakdown</h2>
+                      
+                      <div class="fact-card">
+                        <h3>Mr. Jones</h3>
+                        <p>The original owner of Manor Farm, Jones is a lazy, drunken, and neglectful master. His poor management is the immediate trigger for the revolution. Allegorically, he represents **Tsar Nicholas II**, the autocratic Russian leader whose incompetence and indifference led to the February Revolution.</p>
+                        <div class="quote">
+                          “Mr. Jones, of the Manor Farm, had locked the hen-houses for the night, but was too drunk to remember to shut the pop-holes.”
+                        </div>
+                      </div>
+
+                      <div class="fact-card">
+                        <h3>Mr. Pilkington (Foxwood)</h3>
+                        <p>Owner of the large, old-fashioned, neglected farm next door. He is easy-going but primarily concerned with his own pleasure. He represents the **Allied/Western Powers** (like Britain and the U.S.)—countries that were initially hesitant or hostile towards Soviet Russia but ultimately sought to trade and coexist, albeit uneasily.</p>
+                        <div class="quote">
+                          “Mr. Pilkington was an easy-going gentleman farmer who spent most of his time in fishing or hunting according to the season.”
+                        </div>
+                      </div>
+
+                      <div class="fact-card">
+                        <h3>Mr. Frederick (Pinchfield)</h3>
+                        <p>Owner of a smaller, well-kept, and tightly run farm. Frederick is consistently aggressive, deceitful, and drives a hard bargain. He symbolizes **Nazi Germany** and Hitler. His purchase of timber with fake money and subsequent attack on Animal Farm directly parallels the Molotov-Ribbentrop Pact (non-aggression treaty) followed by Hitler’s invasion of the Soviet Union.</p>
+                        <div class="quote">
+                          “Mr. Frederick, whom seven years of revolutionary song and eloquence had failed to alter, was still the owner of Pinchfield, and still the shrewd, hard-fisted man he had always been.”
+                        </div>
+                      </div>
+
+                      <h2>Conclusion: The Final Indistinction</h2>
+                      <p>
+                        The final, most damning statement on the humans comes when the pigs, now walking on two legs and dressing like men, meet with Pilkington and the others. The famous final line, where the animals cannot tell the difference between the pigs and the men, confirms the tragic circularity of the revolution: the new tyrannical rulers are merely the old oppressors in a different guise.
+                      </p>
+                    
+                    </div>
+                    
+                    <footer>
+                      Group Project by Manuela R, Mirela, Gaga, Peçanha
+                    </footer>
+                    
+                    </body>
+                    </html>
+                    '
+                    class="student-iframe"></iframe>
+        </section>
 
         <!-- Snowball Page (Placeholder) --><section id="snowball-page" class="character-page p-6 bg-white rounded-xl shadow-lg">
             <h2 class="text-3xl font-extrabold text-[var(--color-primary)] mb-4">Snowball</h2>
@@ -431,21 +761,373 @@
             </button>
         </section>
 
-        <!-- Squealer Page (Placeholder) --><section id="squealer-page" class="character-page p-6 bg-white rounded-xl shadow-lg">
-            <h2 class="text-3xl font-extrabold text-[var(--color-primary)] mb-4">Squealer</h2>
-            <div id="squealer-content" class="text-gray-700 space-y-4">
-                <p><strong>Group:</strong> MaLu, Isabella Y, Gui</p>
-                <p class="text-xl italic p-4 bg-gray-50 border-l-4 border-[var(--color-secondary)]">
-                    This is the dedicated space for the **Squealer** group's project.
-                </p>
-                <div class="mt-6 p-4 bg-pink-100 border border-red-300 rounded">
-                    <h3 class="font-semibold text-red-700">Mock Content Template:</h3>
-                    <p>Squealer is the master propagandist, using convoluted language, statistics, and fear tactics to justify Napoleon's every action. He represents the state-controlled media and propaganda machine that keeps the populace compliant and misinformed.</p>
-                </div>
+        <!-- Squealer Page (Embedded Content) --><section id="squealer-page" class="character-page p-0 bg-white rounded-xl shadow-lg overflow-hidden">
+            <!-- Back button placed above the embedded content for visibility --><div class="p-6 bg-white border-b border-gray-100">
+                <button onclick="navigate('home')" class="px-6 py-2 bg-[var(--color-primary)] text-white font-semibold rounded-full hover:bg-red-700 transition duration-150 shadow-md">
+                    ← Back to Character List
+                </button>
+                <p class="mt-4 text-sm text-gray-600">Group: MaLu, Isabella Y, Gui</p>
             </div>
-            <!-- Back button uses Primary Red --><button onclick="navigate('home')" class="mt-8 px-6 py-2 bg-[var(--color-primary)] text-white font-semibold rounded-full hover:bg-red-700 transition duration-150 shadow-md">
-                ← Back to Character List
-            </button>
+            
+            <iframe id="squealer-iframe" 
+                    srcdoc='
+                    <!DOCTYPE html>
+                    <html lang="en">
+                    <head>
+                    <meta charset="utf-8" />
+                    <meta name="viewport" content="width=device-width, initial-scale=1" />
+                    <title>Squealer — Character & Context SketchNotes</title>
+                    <style>
+                      :root{
+                        --ink:#1b1b1b;
+                        --paper:#faf7ef;
+                        --accent:#ffd34d;
+                        --accent-2:#a3d5ff;
+                        --accent-3:#ffc2e2;
+                        --leaf:#c6f6d5;
+                        --shadow:rgba(0,0,0,.18);
+                        --ring:rgba(0,0,0,.12);
+                      }
+                      html,body{margin:0; width: 100%;} /* <-- Added width: 100% here */
+                      body{
+                        background:
+                          radial-gradient(1000px 600px at 120% -10%, #ffffff 10%, #f5efe2 60%, #efe7d8 100%),
+                          repeating-linear-gradient(0deg, #f7f3ea, #f7f3ea 28px, #f1ebdf 28px, #f1ebdf 56px);
+                        color:var(--ink);
+                        font:16px/1.5 "Segoe UI","Helvetica Neue",system-ui,-apple-system,ui-rounded,"Comic Sans MS","Segoe Print",cursive;
+                      }
+                    
+                      /* Layout */
+                      .wrap{max-width:1100px;margin:auto;padding:20px}
+                      header{
+                        display:flex;
+                        align-items:center;
+                        justify-content:space-between;
+                        padding:10px 0 20px 0;
+                        border-bottom:1px dashed var(--ink);
+                      }
+                      header h1{
+                        font-size:2em;
+                        margin:0;
+                        color:var(--ink);
+                      }
+                      .cta-group{
+                        display:flex;gap:10px;
+                      }
+                      .cta{
+                        padding:8px 15px;
+                        background:var(--accent);
+                        color:var(--ink);
+                        border:2px solid var(--ink);
+                        border-radius:25px;
+                        font-weight:bold;
+                        cursor:pointer;
+                        box-shadow:4px 4px 0 var(--ink);
+                        transition:box-shadow .1s, transform .1s;
+                      }
+                      .cta:hover{
+                        box-shadow:2px 2px 0 var(--ink);
+                        transform:translate(2px, 2px);
+                      }
+                    
+                      /* Core Content Blocks */
+                      .section{
+                        margin-top:20px;
+                        padding:20px;
+                        border-radius:10px;
+                        box-shadow:var(--shadow);
+                        background:var(--card);
+                        border-left:5px solid var(--accent);
+                      }
+                      .section h2{
+                        font-size:1.6em;
+                        color:var(--ink);
+                        border-bottom:2px solid var(--accent);
+                        padding-bottom:5px;
+                      }
+                      .propaganda-map{
+                        position:relative;
+                        padding:20px 0;
+                        min-height:400px;
+                      }
+                    
+                      /* Map Nodes */
+                      .node{
+                        position:absolute;
+                        width:150px;
+                        padding:15px;
+                        background:var(--accent-2);
+                        border:2px solid var(--ink);
+                        border-radius:10px;
+                        box-shadow:4px 4px 0 var(--ink);
+                        text-align:center;
+                        transition:all .3s ease-in-out;
+                        cursor:pointer;
+                      }
+                      .node:hover{
+                        background:var(--accent-3);
+                        z-index:10;
+                        transform:scale(1.05);
+                      }
+                      .node-title{
+                        font-weight:bold;
+                        font-size:1.1em;
+                        color:var(--ink);
+                        border-bottom:1px dashed var(--ink);
+                        padding-bottom:5px;
+                        margin-bottom:5px;
+                      }
+                      .node-allegory{
+                        font-size:0.9em;
+                        font-style:italic;
+                      }
+                    
+                      /* Arrows (SVG for connection) */
+                      .arrow{
+                        position:absolute;
+                        pointer-events:none;
+                        z-index:5;
+                      }
+                      .arrow line{
+                        stroke:var(--ink);
+                        stroke-width:3;
+                        marker-end:url(#arrowhead);
+                      }
+                      .arrow-path{
+                        fill:none;
+                        stroke:var(--ink);
+                        stroke-width:3;
+                        marker-end:url(#arrowhead);
+                      }
+                      #arr1{top:50px; left:10px; width:100%; height:300px;}
+                      #arr2{top:50px; left:10px; width:100%; height:300px;}
+                      #arr3{top:50px; left:10px; width:100%; height:300px;}
+                    
+                    
+                      /* Example Drawer (Hidden by default) */
+                      #example{
+                        padding:15px;
+                        background:var(--leaf);
+                        border:1px solid #9ae6b4;
+                        border-radius:8px;
+                        margin-top:15px;
+                        transition:height 0.3s ease-out;
+                      }
+                      #example h3{
+                        color:#2f855a;
+                        font-weight:bold;
+                        font-size:1.1em;
+                        margin-top:0;
+                        border-bottom:1px dotted #2f855a;
+                        padding-bottom:5px;
+                      }
+                    
+                      /* Quotes Section */
+                      #quotes{
+                        padding:20px;
+                        background:var(--accent-3);
+                        border-left:5px solid #d53f8c;
+                        margin-top:20px;
+                        border-radius:10px;
+                        box-shadow:var(--shadow);
+                      }
+                      .quote-box{
+                        margin-bottom:15px;
+                        padding-bottom:10px;
+                        border-bottom:1px dashed #d53f8c;
+                      }
+                      .quote-box:last-child{
+                        border-bottom:none;
+                      }
+                    
+                      /* Responsive Adjustments */
+                      @media (max-width: 600px) {
+                        .wrap {
+                          padding: 10px;
+                        }
+                        header {
+                          flex-direction: column;
+                          text-align: center;
+                          padding: 10px 0;
+                        }
+                        .cta-group {
+                          margin-top: 10px;
+                          justify-content: center;
+                          flex-wrap: wrap;
+                        }
+                        .propaganda-map {
+                          min-height: 550px; /* Increased height for stacking nodes */
+                        }
+                        .node {
+                          position: relative;
+                          width: 90%;
+                          margin-bottom: 20px;
+                          left: auto !important;
+                          top: auto !important;
+                        }
+                        .arrow {
+                          display: none; /* Hide complex arrows on mobile */
+                        }
+                      }
+                    </style>
+                    <script>
+                      // Utility to select the right position based on media query for desktop
+                      function getNodePosition(key) {
+                        const positions = {
+                          'squealer': { top: '10px', left: '400px', allegory: 'Propaganda Master' },
+                          'fear': { top: '150px', left: '600px', allegory: 'Fear of Jones\'s Return' },
+                          'revision': { top: '150px', left: '200px', allegory: 'Historical Revisionism' },
+                          'data': { top: '290px', left: '400px', allegory: 'Misleading Statistics' }
+                        };
+                        return positions[key];
+                      }
+                    
+                      // Handle mobile layout
+                      function isMobile() {
+                        return window.matchMedia("(max-width: 600px)").matches;
+                      }
+                    
+                      // Function to initialize map nodes and interactivity
+                      function initializeMap() {
+                        const map = document.getElementById('map');
+                        const status = document.getElementById('status');
+                        
+                        // Add nodes to the map
+                        ['squealer', 'fear', 'revision', 'data'].forEach(key => {
+                          const pos = getNodePosition(key);
+                          const node = document.createElement('div');
+                          node.className = 'node';
+                          node.dataset.key = key;
+                          node.innerHTML = '\n        <div class="node-title">' + pos.allegory + '</div>\n        <div class="node-allegory">(' + (key.charAt(0).toUpperCase() + key.slice(1)) + ')</div>\n      ';
+                          
+                          // Position only on desktop
+                          if (!isMobile()) {
+                            node.style.top = pos.top;
+                            node.style.left = pos.left;
+                          }
+                          
+                          node.addEventListener('click', () => {
+                            // Simple example: update status based on click
+                            const info = {
+                              'squealer': 'Squealer is the pig\'s spokesperson, tasked with turning lies into truth through silver-tongued rhetoric.',
+                              'fear': 'He constantly reminds the animals that if the pigs fail, Mr. Jones will return, exploiting their deepest anxieties.',
+                              'revision': 'Squealer rewrites the Commandments and revises history (like Snowball\'s heroism) to make Napoleon look infallible.',
+                              'data': 'He uses confusing and often fabricated statistics ("figures, figures, figures") to prove that the farm is prospering, even when animals are starving.'
+                            };
+                            status.innerHTML = '<strong>' + pos.allegory + ':</strong> ' + info[key];
+                            status.style.background = 'var(--accent-2)';
+                          });
+                          map.appendChild(node);
+                        });
+                        
+                        // Initial status message
+                        status.innerHTML = 'Click any node above to see how Squealer wields propaganda!';
+                      }
+                      
+                      // Reveal example drawer
+                      const ex = document.getElementById('example');
+                      document.getElementById('revealExample').addEventListener('click',() => {
+                        ex.hidden = !ex.hidden;
+                        if(!ex.hidden){ ex.scrollIntoView({behavior:'smooth', block:'start'}); }
+                      });
+                    
+                      // Jump to quotes
+                      document.getElementById('jumpQuotes').addEventListener('click',() => {
+                        document.getElementById('quotes').scrollIntoView({behavior:'smooth', block:'start'});
+                      });
+                    
+                      // Footer CTA buttons (smooth scroll)
+                      document.querySelectorAll('[data-scroll]').forEach(b => {
+                        b.addEventListener('click',() => {
+                          const el=document.querySelector(b.dataset.scroll);
+                          if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
+                        });
+                      });
+                    
+                      // Initialize on load
+                      window.onload = initializeMap;
+                    
+                    </script>
+                    </head>
+                    <body>
+                    
+                    <div class="wrap">
+                      <header>
+                        <h1>🐷 Squealer: The Voice of Oppression</h1>
+                        <div class="cta-group">
+                          <button id="jumpQuotes" class="cta">Read Key Quotes</button>
+                          <button id="revealExample" class="cta">Propaganda Example</button>
+                        </div>
+                      </header>
+                    
+                      <div class="section">
+                        <h2>The Allegorical Role: State Propaganda</h2>
+                        <p>
+                          Squealer represents the **Pravda** (the official Soviet newspaper) and the **propaganda machine** of the Communist Party under Stalin. His sole purpose is to manipulate the other animals\' memories and perceptions, ensuring absolute loyalty to Napoleon. He is the rhetorical bridge between Napoleon\'s actions and the animals\' belief system.
+                        </p>
+                      </div>
+                    
+                      <div class="section">
+                        <h2>Propaganda Flowchart: Squealer\'s Methods</h2>
+                        
+                        <div class="propaganda-map" id="map">
+                          <!-- SVG for connection paths on desktop (hidden on mobile) -->
+                          <svg class="arrow" id="arr1" viewBox="0 0 800 300">
+                            <defs><marker id="arrowhead" markerWidth="8" markerHeight="5" refX="2" refY="2.5" orient="auto"><polygon points="0 0, 8 2.5, 0 5" fill="var(--ink)"/></marker></defs>
+                            <path class="arrow-path" d="M 475 35 C 550 50, 600 130, 675 165" />
+                          </svg>
+                          <svg class="arrow" id="arr2" viewBox="0 0 800 300">
+                            <path class="arrow-path" d="M 400 35 C 300 50, 250 130, 225 165" />
+                          </svg>
+                          <svg class="arrow" id="arr3" viewBox="0 0 800 300">
+                            <path class="arrow-path" d="M 475 35 C 500 200, 500 280, 425 305" />
+                          </svg>
+                    
+                          <!-- Nodes generated by JavaScript initializeMap() -->
+                        </div>
+                        
+                        <div id="status" class="section" style="border-left:5px solid var(--ink); background:var(--paper);">
+                          <!-- Status message goes here -->
+                        </div>
+                      </div>
+                      
+                      <div id="example" hidden>
+                        <h3>Example: The Milk and Apples</h3>
+                        <p>
+                          When the animals notice the pigs are hoarding the milk and apples, Squealer is sent to rationalize the injustice. His argument uses three key rhetorical tools:
+                        </p>
+                        <ul>
+                          <li><strong>False Science:</strong> Claims pigs need it for brainwork essential to the farm.</li>
+                          <li><strong>Emotional Blackmail:</strong> Suggests if pigs lose their ability to lead, Jones will return.</li>
+                          <li><strong>The Lie:</strong> Insists pigs actually <em>dislike</em> milk and apples, but consume them purely for the common good.</li>
+                        </ul>
+                      </div>
+                    
+                      <div id="quotes" class="section">
+                        <h2>Squealer\'s Essential Quotes</h2>
+                        <div class="quote-box">
+                          <em>"Surely, comrades, surely you do not want Jones back?"</em>
+                          <p class="text-sm italic">— The cornerstone of Squealer\'s argument, relying on **fear** to prevent critical thought.</p>
+                        </div>
+                        <div class="quote-box">
+                          <em>"Do you know the enemy who has come in the night and overthrown our windmill? SNOWBALL!"</em>
+                          <p class="text-sm italic">— Establishing a **scapegoat** to redirect blame and consolidate Napoleon\'s power.</p>
+                        </div>
+                        <div class="quote-box">
+                          <em>"It had been found necessary to make a slight readjustment of the Commandments."</em>
+                          <p class="text-sm italic">— A euphemism used for **historical revisionism**—changing the law to suit the pigs\' desires.</p>
+                        </div>
+                      </div>
+                    
+                      <footer style="text-align:center; padding:10px 0; font-size:0.9em;">
+                        <p>&copy; Character Synthesis Project | MaLu, Isabella Y, Gui</p>
+                      </footer>
+                    </div>
+                    
+                    </body>
+                    </html>
+                    '
+                    class="student-iframe"></iframe>
         </section>
 
         <!-- Clover & Benjamin Page (Placeholder) --><section id="clover-benjamin-page" class="character-page p-6 bg-white rounded-xl shadow-lg">
@@ -458,23 +1140,6 @@
                 <div class="mt-6 p-4 bg-pink-100 border border-red-300 rounded">
                     <h3 class="font-semibold text-red-700">Mock Content Template:</h3>
                     <p>Clover represents the maternal, questioning part of the working class who suspects the pigs are breaking the Commandments but lacks the intellectual capacity to act. Benjamin, the cynical donkey, represents the intelligentsia who understand the truth but refuse to intervene, believing revolution will always fail.</p>
-                </div>
-            </div>
-            <!-- Back button uses Primary Red --><button onclick="navigate('home')" class="mt-8 px-6 py-2 bg-[var(--color-primary)] text-white font-semibold rounded-full hover:bg-red-700 transition duration-150 shadow-md">
-                ← Back to Character List
-            </button>
-        </section>
-
-        <!-- The Humans Page (Placeholder) --><section id="the-humans-page" class="character-page p-6 bg-white rounded-xl shadow-lg">
-            <h2 class="text-3xl font-extrabold text-[var(--color-primary)] mb-4">The Humans</h2>
-            <div id="the-humans-content" class="text-gray-700 space-y-4">
-                <p><strong>Group:</strong> Manuela R, Mirela, Gaga, Peçanha</p>
-                <p class="text-xl italic p-4 bg-gray-50 border-l-4 border-[var(--color-secondary)]">
-                    This is the dedicated space for **The Humans** group's project.
-                </p>
-                <div class="mt-6 p-4 bg-pink-100 border border-red-300 rounded">
-                    <h3 class="font-semibold text-red-700">Mock Content Template:</h3>
-                    <p>The humans—Mr. Jones, Mr. Pilkington, and Mr. Frederick—represent the decadent Tsar Nicholas II and the capitalist Western powers. They initially fear the revolution but ultimately find ways to exploit the animals, culminating in the chilling final scene where the pigs become indistinguishable from their human counterparts.</p>
                 </div>
             </div>
             <!-- Back button uses Primary Red --><button onclick="navigate('home')" class="mt-8 px-6 py-2 bg-[var(--color-primary)] text-white font-semibold rounded-full hover:bg-red-700 transition duration-150 shadow-md">
@@ -521,8 +1186,12 @@
         function navigate(pageId) {
             const homePage = document.getElementById('home-page');
             const characterPages = document.querySelectorAll('.character-page');
+            
+            // Get iframe references
             const boxerIframe = document.getElementById('boxer-iframe');
             const mosesMollieIframe = document.getElementById('moses-mollie-iframe');
+            const theHumansIframe = document.getElementById('the-humans-iframe');
+            const squealerIframe = document.getElementById('squealer-iframe');
 
 
             // 1. Hide all pages and iframes first
@@ -530,8 +1199,11 @@
             characterPages.forEach(page => {
                 page.style.display = 'none';
             });
+            // Ensure all iframes are hidden before showing the new one
             if (boxerIframe) boxerIframe.style.display = 'none';
             if (mosesMollieIframe) mosesMollieIframe.style.display = 'none';
+            if (theHumansIframe) theHumansIframe.style.display = 'none';
+            if (squealerIframe) squealerIframe.style.display = 'none';
 
 
             // 2. Show the requested page
@@ -549,6 +1221,10 @@
                         activeIframe = boxerIframe;
                     } else if (pageId === 'moses-mollie') {
                         activeIframe = mosesMollieIframe;
+                    } else if (pageId === 'the-humans') {
+                        activeIframe = theHumansIframe;
+                    } else if (pageId === 'squealer') {
+                        activeIframe = squealerIframe;
                     }
                     
                     if (activeIframe) {
