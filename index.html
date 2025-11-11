@@ -1,259 +1,127 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Animal Farm Character Analysis Hub</title>
-    <!-- Load Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        /* Custom scrollbar styling for better aesthetics */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #FFCCCC; } /* Light Red Track */
-        ::-webkit-scrollbar-thumb { background: #CC0000; border-radius: 4px; } /* Accent Red Thumb */
-        ::-webkit-scrollbar-thumb:hover { background: #B30000; } /* Primary Red Hover */
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Animal Farm Character Analysis Hub</title>
 
-        /* Ensure smooth transitions for responsiveness */
-        * { transition: all 0.2s ease-in-out; }
-    </style>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        // Custom Red Monochromatic Theme based on the original class C file
-                        'page-bg': '#FFCCCC',   // Light Red/Pink page background
-                        'primary-red': '#B30000', // Deep Red (Main Brand Color)
-                        'accent-red': '#CC0000',  // Slightly deeper Red (Accents, Borders)
-                        'sidebar-bg': '#800000', // Very dark maroon for high contrast sidebar
-                        'paper': '#fefefe',      // Off-white paper background for cards
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    }
-                }
-            }
+  <!-- Load Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    /* Custom scrollbar styling for better aesthetics */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #FFCCCC; }
+    ::-webkit-scrollbar-thumb { background: #CC0000; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #B30000; }
+    * { transition: all 0.2s ease-in-out; }
+  </style>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'page-bg': '#FFCCCC',
+            'primary-red': '#B30000',
+            'accent-red': '#CC0000',
+            'sidebar-bg': '#800000',
+            'paper': '#fefefe',
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          }
         }
-    </script>
+      }
+    }
+  </script>
 </head>
-<!-- Apply the new light red background -->
+
 <body class="bg-page-bg font-sans min-h-screen flex flex-col md:flex-row">
 
-    <!-- Mobile Menu Button (Hamburger) -->
-    <!-- Button now uses the Primary Red color -->
-    <button id="menu-btn" class="md:hidden fixed top-4 left-4 z-40 p-2 bg-primary-red text-white rounded-full shadow-lg">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
-    </button>
+  <!-- Mobile Menu Button -->
+  <button id="menu-btn" class="md:hidden fixed top-4 left-4 z-40 p-2 bg-primary-red text-white rounded-full shadow-lg">
+    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+    </svg>
+  </button>
 
-    <!-- Sidebar / Navigation Menu -->
-    <!-- Sidebar now uses a dark maroon background for high contrast -->
-    <nav id="sidebar" class="fixed inset-y-0 left-0 transform -translate-x-full md:relative md:translate-x-0 transition-transform duration-300 ease-in-out w-64 bg-sidebar-bg text-white z-30 shadow-2xl flex flex-col pt-16 md:pt-0">
-        
-        <!-- Sidebar Header uses a slightly lighter dark red -->
-        <header class="p-6 border-b border-[#a00000] bg-[#a00000]">
-            <!-- Title is white for high visibility -->
-            <h1 class="text-2xl font-bold text-white">Animal Farm</h1>
-            <p class="text-xs text-red-200 mt-1">Character & Context Synthesis</p>
-        </header>
+  <!-- Sidebar Navigation -->
+  <nav id="sidebar" class="fixed inset-y-0 left-0 transform -translate-x-full md:relative md:translate-x-0 transition-transform duration-300 ease-in-out w-64 bg-sidebar-bg text-white z-30 shadow-2xl flex flex-col pt-16 md:pt-0">
+    <header class="p-6 border-b border-[#a00000] bg-[#a00000]">
+      <h1 class="text-2xl font-bold text-white">Animal Farm</h1>
+      <p class="text-xs text-red-200 mt-1">Character & Context Synthesis</p>
+    </header>
 
-        <ul class="flex-1 p-4 space-y-2 overflow-y-auto">
-            <!-- Navigation links and hover states updated to use the red palette -->
-            <li class="nav-item">
-                <a href="#home" data-page="home" class="block py-3 px-4 rounded-lg text-lg font-medium text-red-100 hover:bg-primary-red hover:text-white transition duration-150 ease-in-out">🏠 Overview</a>
-            </li>
-            <li class="nav-item">
-                <a href="#napoleon" data-page="napoleon" class="block py-3 px-4 rounded-lg text-lg font-medium text-red-100 hover:bg-primary-red hover:text-white transition duration-150 ease-in-out">🐽 Napoleon</a>
-            </li>
-            <li class="nav-item">
-                <a href="#snowball" data-page="snowball" class="block py-3 px-4 rounded-lg text-lg font-medium text-red-100 hover:bg-primary-red hover:text-white transition duration-150 ease-in-out">⚪ Snowball</a>
-            </li>
-            <li class="nav-item">
-                <a href="#squealer" data-page="squealer" class="block py-3 px-4 rounded-lg text-lg font-medium text-red-100 hover:bg-primary-red hover:text-white transition duration-150 ease-in-out">🐷 Squealer</a>
-            </li>
-            <li class="nav-item">
-                <a href="#boxer" data-page="boxer" class="block py-3 px-4 rounded-lg text-lg font-medium text-red-100 hover:bg-primary-red hover:text-white transition duration-150 ease-in-out">🐴 Boxer (Example)</a>
-            </li>
-            <!-- Updated Benjamin to Benjamin & Clover -->
-            <li class="nav-item">
-                <a href="#benjamin-clover" data-page="benjamin-clover" class="block py-3 px-4 rounded-lg text-lg font-medium text-red-100 hover:bg-primary-red hover:text-white transition duration-150 ease-in-out">🐐 Benjamin & Clover</a>
-            </li>
-            <li class="nav-item">
-                <a href="#humans" data-page="humans" class="block py-3 px-4 rounded-lg text-lg font-medium text-red-100 hover:bg-primary-red hover:text-white transition duration-150 ease-in-out">👤 The Humans</a>
-            </li>
-            <li class="nav-item">
-                <a href="#mollie-moses" data-page="mollie-moses" class="block py-3 px-4 rounded-lg text-lg font-medium text-red-100 hover:bg-primary-red hover:text-white transition duration-150 ease-in-out">🎀 Mollie & Moses</a>
-            </li>
-        </ul>
+    <ul class="flex-1 p-4 space-y-2 overflow-y-auto">
+      <li>
+        <a href="index.html" class="block py-3 px-4 rounded-lg text-lg font-medium text-red-100 hover:bg-primary-red hover:text-white transition duration-150 ease-in-out">
+          🏠 Overview
+        </a>
+      </li>
+      <li>
+        <a href="pages/napoleon.html" class="block py-3 px-4 rounded-lg text-lg font-medium text-red-100 hover:bg-primary-red hover:text-white transition duration-150 ease-in-out">
+          🐽 Napoleon
+        </a>
+      </li>
+      <li>
+        <a href="pages/snowball.html" class="block py-3 px-4 rounded-lg text-lg font-medium text-red-100 hover:bg-primary-red hover:text-white transition duration-150 ease-in-out">
+          ⚪ Snowball
+        </a>
+      </li>
+      <li>
+        <a href="pages/squealer.html" class="block py-3 px-4 rounded-lg text-lg font-medium text-red-100 hover:bg-primary-red hover:text-white transition duration-150 ease-in-out">
+          🐷 Squealer
+        </a>
+      </li>
+      <li>
+        <a href="pages/boxer.html" class="block py-3 px-4 rounded-lg text-lg font-medium text-red-100 hover:bg-primary-red hover:text-white transition duration-150 ease-in-out">
+          🐴 Boxer
+        </a>
+      </li>
+      <li>
+        <a href="pages/benjamin-clover.html" class="block py-3 px-4 rounded-lg text-lg font-medium text-red-100 hover:bg-primary-red hover:text-white transition duration-150 ease-in-out">
+          🐐 Benjamin & Clover
+        </a>
+      </li>
+      <li>
+        <a href="pages/humans.html" class="block py-3 px-4 rounded-lg text-lg font-medium text-red-100 hover:bg-primary-red hover:text-white transition duration-150 ease-in-out">
+          👤 The Humans
+        </a>
+      </li>
+      <li>
+        <a href="pages/mollie-moses.html" class="block py-3 px-4 rounded-lg text-lg font-medium text-red-100 hover:bg-primary-red hover:text-white transition duration-150 ease-in-out">
+          🎀 Mollie & Moses
+        </a>
+      </li>
+    </ul>
 
-        <footer class="p-4 text-xs text-red-400 border-t border-[#a00000]">
-            Project Structure v2.1
-        </footer>
-    </nav>
+    <footer class="p-4 text-xs text-red-400 border-t border-[#a00000]">
+      Project Structure v3.0
+    </footer>
+  </nav>
 
-    <!-- Main Content Area -->
-    <main class="flex-1 p-4 md:p-8 overflow-y-auto min-h-screen">
-        <div id="content-view" class="max-w-4xl mx-auto">
-            <!-- Content will be injected here by JavaScript -->
-        </div>
-    </main>
+  <!-- Main Content Area -->
+  <main class="flex-1 p-4 md:p-8 overflow-y-auto min-h-screen">
+    <div id="content-view" class="max-w-4xl mx-auto">
+      <div class="bg-paper p-8 rounded-xl shadow-xl border-t-4 border-accent-red">
+        <h2 class="text-3xl font-extrabold text-primary-red mb-4">F/G Period Character Portfolio</h2>
+        <p class="text-gray-700">Welcome! Use the sidebar to explore each group’s independent analysis of characters from <em>Animal Farm</em>.</p>
+        <p class="mt-6 text-sm text-gray-500 italic">Each linked page was created by a different student team and opens separately.</p>
+      </div>
+    </div>
+  </main>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const contentView = document.getElementById('content-view');
-            const sidebar = document.getElementById('sidebar');
-            const menuBtn = document.getElementById('menu-btn');
-            
-            // --- 1. Define Page Content ---
-            const PAGES = {
-                'home': `
-                    <!-- Home page content -->
-                    <div class="bg-paper p-8 rounded-xl shadow-xl border-t-4 border-accent-red">
-                        <h2 class="text-3xl font-extrabold text-primary-red mb-4">F/G Period Character Portfolio</h2>
-                        <p class="text-gray-700">Click around to see your classmates' work and to review the context and significance of each character in the novel.</p>
-                        <p class="mt-6 text-sm text-gray-500 italic">Select a character from the menu on the left to load their analysis report.</p>
-                    </div>
-                `,
-                'napoleon': `
-                    <!-- NEW: Napoleon Page Placeholder -->
-                    <div class="bg-paper p-8 rounded-xl shadow-xl border-t-4 border-accent-red">
-                        <h2 class="text-3xl font-extrabold text-primary-red mb-4">🐽 Napoleon: The Tyrant</h2>
-                        <p class="text-gray-700">Paste the HTML content for your <strong>Napoleon</strong> report here. This analysis focuses on his ruthless rise to power and consolidation of control. Remember to remove the <code>&lt;html&gt;</code>, <code>&lt;head&gt;</code>, and <code>&lt;body&gt;</code> tags from your original file before pasting it into this string.</p>
-                    </div>
-                `,
-                'snowball': `
-                    <!-- NEW: Snowball Page Placeholder -->
-                    <div class="bg-paper p-8 rounded-xl shadow-xl border-t-4 border-accent-red">
-                        <h2 class="text-3xl font-extrabold text-primary-red mb-4">⚪ Snowball: Idealism and Exile</h2>
-                        <p class="text-gray-700">Paste the HTML content for your <strong>Snowball</strong> report here. This section covers his role as a brilliant but ultimately defeated revolutionary. Remove external tags.</p>
-                    </div>
-                `,
-                'squealer': `
-                    <div class="bg-paper p-8 rounded-xl shadow-xl border-t-4 border-accent-red">
-                        <h2 class="text-3xl font-extrabold text-primary-red mb-4">🐷 Squealer: Master of Propaganda</h2>
-                        <p class="text-gray-700">Paste the HTML content for your <strong>Squealer</strong> report here. Remember to remove the <code>&lt;html&gt;</code>, <code>&lt;head&gt;</code>, and <code>&lt;body&gt;</code> tags from your original Squealer file before pasting it into this string.</p>
-                    </div>
-                `,
-                'boxer': `
-                    <!-- Boxer Sketchnotes Content (boxer_sketchnotes.html) adapted to use Tailwind styling -->
-                    <div class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-accent-red max-w-4xl mx-auto">
-                        <header class="text-center p-6 bg-yellow-100 rounded-t-lg border-b-4 border-yellow-500 mb-6">
-                            <h1 class="text-3xl font-extrabold text-primary-red mb-1">🐴 Boxer: The Tragic Proletariat</h1>
-                            <p class="text-lg text-gray-600">Character and Context Synthesis Report</p>
-                        </header>
-                        
-                        <div class="grid md:grid-cols-2 gap-8">
-                            
-                            <section class="p-4 bg-red-50 border-l-4 border-primary-red rounded-lg shadow-md">
-                                <h2 class="text-xl font-bold text-accent-red mb-2">⭐ Core Identity</h2>
-                                <p class="text-gray-700"><strong>Two Maxims:</strong> "I will work harder" and "Napoleon is always right."</p>
-                                <p class="text-gray-700 mt-2">The strongest animal on the farm, known for his incredible work ethic, simple-minded loyalty, and unquestioning trust in leadership.</p>
-                                <details class="mt-4 p-2 bg-red-100 rounded-md">
-                                    <summary class="font-semibold cursor-pointer text-primary-red">🔎 Character Analysis</summary>
-                                    <p class="text-sm pt-2">His strength is his downfall; it makes him valuable to the Pigs until he is no longer useful. Boxer's loyalty reveals how a dictator's power can be sustained by the genuine devotion of the exploited.</p>
-                                </details>
-                            </section>
+  <!-- Simplified JS for Mobile Menu -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const sidebar = document.getElementById('sidebar');
+      const menuBtn = document.getElementById('menu-btn');
+      menuBtn.addEventListener('click', () => {
+        sidebar.classList.toggle('-translate-x-full');
+      });
+    });
+  </script>
 
-                            <section class="p-4 bg-yellow-50 border-l-4 border-yellow-500 rounded-lg shadow-md">
-                                <h2 class="text-xl font-bold text-accent-red mb-2">🪓 Historical Parallel</h2>
-                                <p class="text-gray-700">Boxer allegorically represents the <strong>Proletariat and Peasantry</strong> of Soviet Russia.</p>
-                                <details class="mt-4 p-2 bg-yellow-100 rounded-md">
-                                    <summary class="font-semibold cursor-pointer text-primary-red">🔗 Explore the Allegory</summary>
-                                    <p class="text-sm pt-2">His relentless work on the windmill mirrors the Soviet people’s sacrifices under Stalin’s Five-Year Plans. His final betrayal and sale to the knacker is Orwell's harshest indictment of the Soviet state's cruelty toward its most loyal subjects.</p>
-                                </details>
-                            </section>
-                            
-                            <section class="md:col-span-2 p-4 bg-green-50 border-l-4 border-green-500 rounded-lg shadow-md">
-                                <h2 class="text-xl font-bold text-accent-red mb-2">💭 Big Picture & Thematic Warning</h2>
-                                <p class="text-gray-700">Boxer’s story blends **hope, tragedy, and warning**—a reminder that revolutions can devour their own heroes.</p>
-                                <ul class="list-disc list-inside mt-2 text-gray-600">
-                                    <li>His tragedy warns against **unthinking devotion** to any political leader or ideology.</li>
-                                    <li>His faith allowed the farm's corruption; awareness without action is complicity.</li>
-                                </ul>
-                            </section>
-                        </div>
-
-                        <footer class="mt-6 pt-4 border-t border-gray-200 text-center text-xs text-gray-500">
-                            ✏️ Adapted from sketch-note web summary.
-                        </footer>
-                    </div>
-                `,
-                // UPDATED: Benjamin to Benjamin & Clover
-                'benjamin-clover': `
-                    <div class="bg-paper p-8 rounded-xl shadow-xl border-t-4 border-accent-red">
-                        <h2 class="text-3xl font-extrabold text-primary-red mb-4">🐐 Benjamin & Clover: The Silent and the Maternal Witnesses</h2>
-                        <p class="text-gray-700">Paste the HTML content for your <strong>Benjamin & Clover</strong> report here. This section explores their roles as passive witnesses and the moral center of the farm. Remove external tags.</p>
-                    </div>
-                `,
-                'humans': `
-                    <div class="bg-paper p-8 rounded-xl shadow-xl border-t-4 border-accent-red">
-                        <h2 class="text-3xl font-extrabold text-primary-red mb-4">👤 The Humans: Pilkington, Frederick & Jones</h2>
-                        <p class="text-gray-700">Paste the HTML content for your <strong>Humans</strong> report here. Remove external tags.</p>
-                    </div>
-                `,
-                'mollie-moses': `
-                    <div class="bg-paper p-8 rounded-xl shadow-xl border-t-4 border-accent-red">
-                        <h2 class="text-3xl font-extrabold text-primary-red mb-4">🎀 Mollie & Moses: Distraction and Escape</h2>
-                        <p class="text-gray-700">Paste the HTML content for your <strong>Mollie & Moses</strong> report here. Remove external tags.</p>
-                    </div>
-                `
-            };
-            
-            // --- 2. Routing Logic ---
-
-            // Function to render the specific page content
-            const renderPage = (pageId) => {
-                const content = PAGES[pageId] || PAGES['home'];
-                contentView.innerHTML = content;
-                
-                // Update active link styling
-                document.querySelectorAll('.nav-item a').forEach(link => {
-                    if (link.dataset.page === pageId) {
-                        // Active link style using accent-red background
-                        link.classList.remove('text-red-100', 'hover:bg-primary-red');
-                        link.classList.add('bg-accent-red', 'text-white', 'shadow-md');
-                    } else {
-                        // Inactive link style
-                        link.classList.add('text-red-100', 'hover:bg-primary-red');
-                        link.classList.remove('bg-accent-red', 'text-white', 'shadow-md');
-                    }
-                });
-
-                // Close sidebar on mobile after navigating
-                if (window.innerWidth < 768) {
-                    sidebar.classList.add('-translate-x-full');
-                }
-
-                // Update the URL hash without reloading the page
-                history.pushState(null, '', '#' + pageId);
-                
-                // Scroll to the top of the content area
-                window.scrollTo(0, 0);
-            };
-
-            // Event listener for navigation clicks
-            document.querySelectorAll('.nav-item a').forEach(link => {
-                link.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    const pageId = link.dataset.page;
-                    renderPage(pageId);
-                });
-            });
-
-            // Handle initial load and browser back/forward buttons
-            const loadInitialPage = () => {
-                const hash = window.location.hash.substring(1) || 'home';
-                renderPage(hash);
-            };
-
-            window.addEventListener('hashchange', loadInitialPage);
-            loadInitialPage(); // Load content on first page visit
-
-            // --- 3. Mobile Menu Toggle ---
-            menuBtn.addEventListener('click', () => {
-                sidebar.classList.toggle('-translate-x-full');
-            });
-
-        });
-    </script>
 </body>
 </html>
